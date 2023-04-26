@@ -1,0 +1,286 @@
+name: Load test
+
+on:
+  workflow_dispatch:
+    inputs:
+      connections:
+        description: "Number of connections"
+        required: true
+        default: "60"
+      duration:
+        description: "Duration (sec)"
+        required: true
+        default: "300"
+      workers:
+        description: "Number of workers"
+        required: true
+        default: "10"
+      timeout:
+        description: "Timeout (sec)"
+        required: true
+        default: "60"
+      url1:
+        description: "Url 1"
+        required: true
+      url2:
+        description: "Url 2"
+      url3:
+        description: "Url 3"
+      url4:
+        description: "Url 4"
+      url5:
+        description: "Url 5"
+      url6:
+        description: "Url 6"
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node env
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+  url1:
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url1 }}
+
+  url2:
+    if: startsWith(github.event.inputs.url2, 'http')
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url2 }}
+
+  url3:
+    if: startsWith(github.event.inputs.url3, 'http')
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url3 }}
+
+  url4:
+    if: startsWith(github.event.inputs.url4, 'http')
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url4 }}
+
+  url5:
+    if: startsWith(github.event.inputs.url5, 'http')
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url5 }}
+
+  url6:
+    if: startsWith(github.event.inputs.url6, 'http')
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Start load test
+        run: |
+          yarn autocannon -c ${{ github.event.inputs.connections }} \
+          -d ${{ github.event.inputs.duration }} \
+          -w ${{ github.event.inputs.workers }} \
+          -t ${{ github.event.inputs.timeout }} \
+          ${{ github.event.inputs.url6 }}

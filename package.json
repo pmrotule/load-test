@@ -1,0 +1,9 @@
+{
+  "name": "load-test",
+  "description": "Load test using Github actions",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "autocannon": "^7.10.0"
+  }
+}
